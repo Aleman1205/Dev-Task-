@@ -20,12 +20,12 @@ import {
 import { obtenerTareas } from '../services/tasks.service'
 import type {
   EstadoFiltro,
-  EstadoTarea,
   PrioridadFiltro,
-  PrioridadTarea,
   Tarea,
 } from '../types'
 import {
+  calcularPorcentaje,
+  extraerOpcionesUnicas,
   obtenerTextoEstado,
   obtenerTextoPrioridad,
   obtenerVarianteEstado,
@@ -46,11 +46,6 @@ interface ReporteGenerado {
   horasReales: number
   eficienciaTiempo: string
   observaciones: string[]
-}
-
-function calcularPorcentaje(parte: number, total: number) {
-  if (total <= 0) return 0
-  return Math.round((parte / total) * 100)
 }
 
 function generarReporteTarea(tarea: Tarea): ReporteGenerado {
@@ -164,22 +159,18 @@ export default function Reportes() {
   }, [usuarioActual, tareas])
 
   const proyectos = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.proyectoNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.proyectoNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 
   const responsables = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.responsableNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.responsableNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 

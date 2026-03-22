@@ -32,6 +32,7 @@ import type {
   Tarea,
 } from '../types'
 import {
+  extraerOpcionesUnicas,
   formatearSegundos,
   obtenerTextoEstado,
   obtenerTextoPrioridad,
@@ -318,32 +319,26 @@ export default function Tareas() {
   }, [tareaActivaId, tareasVisibles])
 
   const proyectos = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.proyectoNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.proyectoNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 
   const responsablesDisponibles = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.responsableNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.responsableNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 
   const proyectosDisponibles = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.proyectoNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.proyectoNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 
@@ -354,20 +349,20 @@ export default function Tareas() {
       .map((tarea) => tarea.categoria)
       .filter((valor): valor is string => Boolean(valor))
 
-    return Array.from(new Set([...categoriasBase, ...categoriasDinamicas]))
+    return extraerOpcionesUnicas([...categoriasBase, ...categoriasDinamicas])
   }, [tareasVisibles])
 
   const opcionesBusquedaTareas = useMemo(() => {
-    return Array.from(new Set(tareasVisibles.map((tarea) => tarea.titulo).filter(Boolean)))
+    return extraerOpcionesUnicas(
+      tareasVisibles.map((tarea) => tarea.titulo).filter((valor): valor is string => Boolean(valor)),
+    )
   }, [tareasVisibles])
 
   const opcionesBusquedaResponsables = useMemo(() => {
-    return Array.from(
-      new Set(
-        tareasVisibles
-          .map((tarea) => tarea.responsableNombre)
-          .filter((valor): valor is string => Boolean(valor)),
-      ),
+    return extraerOpcionesUnicas(
+      tareasVisibles
+        .map((tarea) => tarea.responsableNombre)
+        .filter((valor): valor is string => Boolean(valor)),
     )
   }, [tareasVisibles])
 
@@ -611,7 +606,8 @@ export default function Tareas() {
       setModalIAAbierto(false)
       setModalAbierto(true)
       setMensaje('Se generó un borrador de tarea con IA. Revísalo y guárdalo.')
-    } catch {
+    } catch (error) {
+      console.error('Error detallado al generar tarea con IA:', error)
       setMensaje('No se pudo generar la tarea con IA.')
     } finally {
       setGenerandoIA(false)

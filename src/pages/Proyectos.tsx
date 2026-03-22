@@ -15,6 +15,7 @@ import {
 import { obtenerProyectos } from '../services/projects.service'
 import { obtenerTareas } from '../services/tasks.service'
 import type { Proyecto, Tarea } from '../types'
+import { calcularPorcentaje, extraerOpcionesUnicas } from '../utils/taskFormatters'
 
 type EstadoProyectoFiltro = 'todos' | string
 
@@ -61,11 +62,6 @@ function obtenerVarianteEstadoProyecto(estado: string) {
   }
 }
 
-function calcularPorcentajeAvance(total: number, completadas: number) {
-  if (total <= 0) return 0
-  return Math.round((completadas / total) * 100)
-}
-
 export default function Proyectos() {
   const { usuarioActual } = useAuth()
 
@@ -109,8 +105,8 @@ export default function Proyectos() {
   }, [usuarioActual, proyectos, tareasVisibles])
 
   const estadosDisponibles = useMemo(() => {
-    return Array.from(
-      new Set(proyectosVisibles.map((proyecto) => String(proyecto.estado)).filter(Boolean)),
+    return extraerOpcionesUnicas(
+      proyectosVisibles.map((proyecto) => String(proyecto.estado)).filter(Boolean),
     )
   }, [proyectosVisibles])
 
@@ -130,7 +126,7 @@ export default function Proyectos() {
       const tareasPendientes = tareasProyecto.filter(
         (tarea) => tarea.estado === 'pendiente',
       ).length
-      const porcentajeAvance = calcularPorcentajeAvance(totalTareas, tareasCompletadas)
+      const porcentajeAvance = calcularPorcentaje(tareasCompletadas, totalTareas)
 
       return {
         ...proyecto,
@@ -180,9 +176,7 @@ export default function Proyectos() {
 
           {puedeCrear && (
             <div className="flex justify-start lg:justify-end">
-              <Boton type="button">
-                Nuevo proyecto
-              </Boton>
+              <Boton type="button">Nuevo proyecto</Boton>
             </div>
           )}
         </div>
