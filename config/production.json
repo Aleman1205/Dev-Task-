@@ -1,0 +1,17 @@
+{
+  "APP_NAME": "Dashboard for Oracle Project",
+  "PORT": 3000,
+  "ENVIRONMENT": "production",
+  "DB_HOST": "prod-db.oracle.internal",
+  "DB_PORT": 5432,
+  "DEBUG": false,
+  "FEATURE_FLAGS": {
+    "ENABLE_ANALYTICS": true,
+    "ENABLE_ADVANCED_REPORTING": true,
+    "ENABLE_BULK_OPERATIONS": true,
+    "ENABLE_API_LOGGING": false
+  },
+  "LOG_LEVEL": "warn",
+  "API_TIMEOUT": 60000,
+  "CACHE_ENABLED": true
+}

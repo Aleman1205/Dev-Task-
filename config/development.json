@@ -1,0 +1,17 @@
+{
+  "APP_NAME": "Dashboard for Oracle Project",
+  "PORT": 5173,
+  "ENVIRONMENT": "development",
+  "DB_HOST": "localhost",
+  "DB_PORT": 5432,
+  "DEBUG": true,
+  "FEATURE_FLAGS": {
+    "ENABLE_ANALYTICS": false,
+    "ENABLE_ADVANCED_REPORTING": false,
+    "ENABLE_BULK_OPERATIONS": false,
+    "ENABLE_API_LOGGING": true
+  },
+  "LOG_LEVEL": "debug",
+  "API_TIMEOUT": 30000,
+  "CACHE_ENABLED": false
+}

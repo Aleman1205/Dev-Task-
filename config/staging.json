@@ -1,0 +1,17 @@
+{
+  "APP_NAME": "Dashboard for Oracle Project",
+  "PORT": 8080,
+  "ENVIRONMENT": "staging",
+  "DB_HOST": "staging-db.internal",
+  "DB_PORT": 5432,
+  "DEBUG": false,
+  "FEATURE_FLAGS": {
+    "ENABLE_ANALYTICS": true,
+    "ENABLE_ADVANCED_REPORTING": true,
+    "ENABLE_BULK_OPERATIONS": false,
+    "ENABLE_API_LOGGING": true
+  },
+  "LOG_LEVEL": "info",
+  "API_TIMEOUT": 45000,
+  "CACHE_ENABLED": true
+}
