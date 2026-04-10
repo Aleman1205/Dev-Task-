@@ -50,7 +50,6 @@ export default function Login() {
             onChange={(e) => setCorreo(e.target.value)}
             required
             disabled={cargando}
-            helperText="Usuarios demo: admin@devtask.local, manager@devtask.local, developer@devtask.local"
           />
 
           <Input
