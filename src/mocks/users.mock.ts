@@ -42,4 +42,4 @@ export const usuariosMock: Usuario[] = [
   },
 ]
 
-export const usuarioActualInicialMock: Usuario = usuariosMock[1]
+export const usuarioActualInicialMock: Usuario | null = null

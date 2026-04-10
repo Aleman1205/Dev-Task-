@@ -1,17 +1,22 @@
 import { useState } from 'react'
 import type { Pagina } from './types'
 import { Header } from './components'
-import { AuthProvider } from './auth'
+import { AuthProvider, useAuth } from './auth'
+import { cerrarSesion } from './services/auth.service'
 import Dashboard from './pages/Dashboard'
 import Tareas from './pages/Tareas'
 import Reportes from './pages/Reportes'
 import Proyectos from './pages/Proyectos'
+import Login from './pages/Login'
 
 function AppContenido() {
+  const { estaAutenticado, cargando } = useAuth()
   const [paginaActual, setPaginaActual] = useState<Pagina>('dashboard')
 
-  const manejarCerrarSesion = () => {
+  const manejarCerrarSesion = async () => {
+    await cerrarSesion()
     setPaginaActual('dashboard')
+    window.location.reload()
   }
 
   const renderizarPagina = () => {
@@ -29,6 +34,24 @@ function AppContenido() {
     }
   }
 
+  // Mostrar pantalla de carga
+  if (cargando) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600 font-medium">Cargando...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Mostrar login si no está autenticado
+  if (!estaAutenticado) {
+    return <Login />
+  }
+
+  // Mostrar dashboard
   return (
     <div className="min-h-screen bg-gray-50">
       <Header
