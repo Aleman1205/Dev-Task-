@@ -74,24 +74,7 @@ export default function Login() {
           </Boton>
         </form>
 
-        {/* Usuarios Demo */}
-        <div className="mt-8 rounded-lg bg-blue-50 p-4 border border-blue-200">
-          <p className="text-xs font-semibold text-blue-900 mb-3">USUARIOS DE PRUEBA:</p>
-          <div className="space-y-2">
-            <div>
-              <p className="text-xs font-medium text-blue-900">Admin</p>
-              <p className="text-xs text-blue-700 font-mono">admin@devtask.local</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-blue-900">Manager</p>
-              <p className="text-xs text-blue-700 font-mono">manager@devtask.local</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-blue-900">Developer</p>
-              <p className="text-xs text-blue-700 font-mono">developer@devtask.local</p>
-            </div>
-          </div>
-        </div>
+      
       </div>
     </div>
   )
