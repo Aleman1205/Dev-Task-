@@ -7,6 +7,7 @@
     "dev": "vite",
     "dev:backend": "tsx watch backend/src/server.ts",
     "dev:full": "pnpm run dev:backend & pnpm run dev",
+    "test:db": "tsx backend/src/testConnection.ts",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -14,8 +15,9 @@
   "dependencies": {
     "@google/genai": "^1.46.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "mysql2": "^3.22.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -31,7 +33,9 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
     "vite": "^8.0.0"
   }
 }
