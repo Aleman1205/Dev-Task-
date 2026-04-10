@@ -2,6 +2,7 @@ import 'dotenv/config'
 import cors from 'cors'
 import express from 'express'
 import iaRoutes from './routes/ia.routes.js'
+import authRoutes from './routes/auth.routes.js'
 
 const app = express()
 const PORT = Number(process.env.PORT) || 3001
@@ -22,6 +23,7 @@ app.get('/api/health', (_req, res) => {
 })
 
 app.use('/api/ia', iaRoutes)
+app.use('/api/auth', authRoutes)
 
 app.listen(PORT, () => {
     console.log(`🚀 Backend corriendo en http://localhost:${PORT}`)
